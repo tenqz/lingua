@@ -1,6 +1,6 @@
 {
     "name": "tenqz/lingua",
-    "description": "Lingua is a comprehensive PHP library designed for advanced Russian text processing.",
+    "description": "Lingua is a comprehensive PHP library designed for advanced text processing.",
     "type": "library",
     "license": "MIT",
     "autoload": {
@@ -24,6 +24,9 @@
         "php": "^8.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^12.2@dev"
+        "phpunit/phpunit": "^10.0"
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }
