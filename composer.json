@@ -1,0 +1,21 @@
+{
+    "name": "tenqz/lingua",
+    "description": "Lingua is a comprehensive PHP library designed for advanced Russian text processing.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Tenqz\\Lingua\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Oleg Patsay",
+            "email": "smmartbiz@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.0"
+    }
+}
