@@ -8,6 +8,11 @@
             "Tenqz\\Lingua\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tenqz\\Lingua\\Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Oleg Patsay",
@@ -17,5 +22,8 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.2@dev"
     }
 }
