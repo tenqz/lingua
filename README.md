@@ -11,6 +11,26 @@ Lingua is a comprehensive PHP library designed for advanced text processing. It 
 - Easy to extend with custom handlers
 - PHP 8.0+ support
 
+## Available Handlers
+
+The library provides several built-in text processing handlers:
+
+### SpecialCharsHandler
+
+Removes special characters from text while preserving words and spaces. This handler:
+- Removes all special characters (punctuation marks, symbols, etc.)
+- Replaces newlines with spaces
+- Normalizes multiple spaces into single spaces
+- Trims spaces from the beginning and end of text
+
+Example:
+```php
+use Tenqz\Lingua\Handler\SpecialCharsHandler;
+
+$handler = new SpecialCharsHandler();
+$result = $handler->handle("Hello! @#$%^&*() World..."); // Returns: "Hello World"
+```
+
 ## Installation
 
 ```bash
