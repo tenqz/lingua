@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://github.com/tenqz/lingua/actions"><img src="https://github.com/tenqz/lingua/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://github.com/tenqz/lingua/actions"><img src="https://github.com/tenqz/lingua/workflows/Tests/badge.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/tenqz/lingua"><img src="https://img.shields.io/packagist/dt/tenqz/lingua" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/tenqz/lingua"><img src="https://img.shields.io/packagist/v/tenqz/lingua" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/tenqz/lingua"><img src="https://img.shields.io/packagist/l/tenqz/lingua" alt="License"></a>
@@ -16,7 +16,7 @@ Lingua is a comprehensive PHP library designed for advanced text processing. It 
 - Chain of Responsibility pattern for text processing
 - Flexible scenario-based processing
 - Easy to extend with custom handlers
-- PHP 8.0+ support
+- PHP 8.1+ support
 
 ## Available Handlers
 
