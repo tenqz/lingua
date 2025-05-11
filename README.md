@@ -5,7 +5,7 @@
 <a href="https://packagist.org/packages/tenqz/lingua"><img src="https://img.shields.io/packagist/l/tenqz/lingua" alt="License"></a>
 </p>
 
-# Lingua v2.0.1
+# Lingua v2.1.0
 
 Lingua is a comprehensive PHP library designed for advanced text processing. It implements the Chain of Responsibility pattern to provide flexible and extensible text processing capabilities.
 
@@ -27,15 +27,42 @@ The library provides several built-in text processing handlers:
 Removes special characters from text while preserving words and spaces. This handler:
 - Removes all special characters (punctuation marks, symbols, etc.)
 - Replaces newlines with spaces
-- Normalizes multiple spaces into single spaces
-- Trims spaces from the beginning and end of text
+- Preserves spaces between words
 
 Example:
 ```php
 use Tenqz\Lingua\Handlers\Basic\SpecialCharsHandler;
 
 $handler = new SpecialCharsHandler();
-$result = $handler->handle("Hello! @#$%^&*() World..."); // Returns: "Hello World"
+$result = $handler->handle("Hello! @#$%^&*() World..."); // Returns: "Hello  World"
+```
+
+### NormalizeSpacesHandler
+
+Normalizes whitespace in text. This handler:
+- Replaces multiple spaces, tabs, and newlines with a single space
+- Preserves leading and trailing whitespace
+
+Example:
+```php
+use Tenqz\Lingua\Handlers\Basic\NormalizeSpacesHandler;
+
+$handler = new NormalizeSpacesHandler();
+$result = $handler->handle("Hello    World\t\nTest"); // Returns: "Hello World Test"
+```
+
+### TrimHandler
+
+Removes whitespace from the beginning and end of text. This handler:
+- Removes spaces, tabs, and newlines from the beginning and end of text
+- Preserves whitespace between words
+
+Example:
+```php
+use Tenqz\Lingua\Handlers\Basic\TrimHandler;
+
+$handler = new TrimHandler();
+$result = $handler->handle("  Hello World  "); // Returns: "Hello World"
 ```
 
 ### HtmlTagsHandler
@@ -86,6 +113,30 @@ $processor->addHandler(new CustomHandler());
 
 // Process text
 $result = $processor->process('Your text here');
+```
+
+### Chain of Handlers Example
+
+You can combine multiple handlers to create a processing pipeline:
+
+```php
+use Tenqz\Lingua\Core\TextProcessor;
+use Tenqz\Lingua\Handlers\Basic\SpecialCharsHandler;
+use Tenqz\Lingua\Handlers\Basic\NormalizeSpacesHandler;
+use Tenqz\Lingua\Handlers\Basic\TrimHandler;
+
+// Initialize the processor
+$processor = new TextProcessor();
+
+// Create a chain of handlers
+$processor
+    ->addHandler(new SpecialCharsHandler())    // First, remove special characters
+    ->addHandler(new NormalizeSpacesHandler()) // Then, normalize spaces
+    ->addHandler(new TrimHandler());           // Finally, trim whitespace
+
+// Process text through the entire chain
+$result = $processor->process('  Hello! @#$%^&*() World...  ');
+// Result: "Hello World"
 ```
 
 ## Architecture

@@ -34,14 +34,8 @@ class SpecialCharsHandler extends AbstractTextHandler
 
         // Create pattern that matches any of the special characters
         $pattern = '/[' . implode('', $escapedChars) . ']/u';
-
+        
         // Remove special characters while preserving spaces
-        $text = preg_replace($pattern, '', $text);
-
-        // Normalize spaces (replace multiple spaces with single space)
-        $text = preg_replace('/\s+/', ' ', $text);
-
-        // Remove spaces from beginning and end
-        return trim($text);
+        return preg_replace($pattern, '', $text);
     }
 }
