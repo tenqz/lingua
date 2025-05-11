@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<ruleset name="Lingua Coding Standard">
+    <description>Coding standard for Tenqz/Lingua project</description>
+
+    <!-- Scan these directories -->
+    <file>src</file>
+    <file>tests</file>
+
+    <!-- Exclude vendor directory -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+
+    <!-- Use PSR-12 as the base standard -->
+    <rule ref="PSR12"/>
+    
+    <!-- Additional rules -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120"/>
+            <property name="absoluteLineLimit" value="0"/>
+        </properties>
+    </rule>
+
+    <!-- Don't hide tokenizer exceptions -->
+    <rule ref="Internal.Tokenizer.Exception">
+        <type>error</type>
+    </rule>
+
+    <!-- Specific rules for tests -->
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <exclude-pattern>*/tests/*</exclude-pattern>
+    </rule>
+</ruleset> 

@@ -21,7 +21,7 @@ class SpecialCharsHandlerTest extends TestCase
     {
         $input = "Hello! @#$%^&*() World...";
         $expected = "Hello World";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -33,7 +33,7 @@ class SpecialCharsHandlerTest extends TestCase
     {
         $input = "Привет! «Мир»...";
         $expected = "Привет Мир";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -45,7 +45,7 @@ class SpecialCharsHandlerTest extends TestCase
     {
         $input = "-_+{}|:<>?[];',./\\~`=—«»";
         $expected = "";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -57,7 +57,7 @@ class SpecialCharsHandlerTest extends TestCase
     {
         $input = "Hello\nWorld";
         $expected = "Hello World";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -69,7 +69,7 @@ class SpecialCharsHandlerTest extends TestCase
     {
         $input = "Hello\n\n\nWorld";
         $expected = "Hello World";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -81,7 +81,7 @@ class SpecialCharsHandlerTest extends TestCase
     {
         $input = "Hello    World";
         $expected = "Hello World";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -93,7 +93,7 @@ class SpecialCharsHandlerTest extends TestCase
     {
         $input = "Hello! @#$%^&*()\nWorld...\n\nTest    Test";
         $expected = "Hello World Test Test";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -105,7 +105,7 @@ class SpecialCharsHandlerTest extends TestCase
     {
         $input = "Hello! Привет!\nWorld... Мир...";
         $expected = "Hello Привет World Мир";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -117,7 +117,7 @@ class SpecialCharsHandlerTest extends TestCase
     {
         $input = "";
         $expected = "";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -129,8 +129,8 @@ class SpecialCharsHandlerTest extends TestCase
     {
         $input = "! @ # $ % ^ & * ( ) _ + { } | : < > ? [ ] ; ' , . / \\ ~ ` = — « »";
         $expected = "";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
-} 
+}

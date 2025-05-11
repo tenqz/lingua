@@ -31,7 +31,7 @@ class TextProcessor implements TextProcessorInterface
         while ($lastHandler->getNext()) {
             $lastHandler = $lastHandler->getNext();
         }
-        
+
         $lastHandler->setNext($handler);
         return $this;
     }
@@ -47,4 +47,4 @@ class TextProcessor implements TextProcessorInterface
 
         return $this->handlersChain->handle($text);
     }
-} 
+}

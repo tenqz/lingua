@@ -42,7 +42,7 @@ class TextProcessorTest extends TestCase
             ->willReturn($expectedOutput);
 
         $this->processor->addHandler($this->mockHandler);
-        
+
         $result = $this->processor->process($inputText);
         $this->assertEquals($expectedOutput, $result);
     }
@@ -59,32 +59,32 @@ class TextProcessorTest extends TestCase
         // Create a mock for the first handler
         $firstHandler = $this->getMockBuilder(TextHandlerInterface::class)
             ->getMock();
-            
+
         // Create a mock for the second handler
         $secondHandler = $this->getMockBuilder(TextHandlerInterface::class)
             ->getMock();
-            
+
         // Configure the first handler to process the text and return intermediateText
         $firstHandler->method('handle')
             ->with($inputText)
             ->willReturn($expectedOutput); // This will be the final result as per chain of responsibility
-            
+
         // Configure the second handler to process intermediate text and return expectedOutput
         $secondHandler->method('handle')
             ->with($intermediateText)
             ->willReturn($expectedOutput);
-        
+
         // Configure getNext to implement the chain
         $firstHandler->method('getNext')
             ->willReturn(null); // We'll manually simulate chain
-            
+
         // Setup the processor with only the first handler
         $this->processor->addHandler($firstHandler);
-        
+
         // Process the text
         $result = $this->processor->process($inputText);
-        
+
         // Check the final result
         $this->assertEquals($expectedOutput, $result);
     }
-} 
+}

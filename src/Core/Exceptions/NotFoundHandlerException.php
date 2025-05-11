@@ -11,4 +11,4 @@ class NotFoundHandlerException extends \RuntimeException
     {
         parent::__construct('Handler not found');
     }
-} 
+}

@@ -12,7 +12,7 @@ abstract class AbstractTextHandler implements TextHandlerInterface
 {
     /**
      * Reference to the next handler in the chain
-     * 
+     *
      * @var TextHandlerInterface|null
      */
     protected ?TextHandlerInterface $nextHandler = null;
@@ -28,7 +28,7 @@ abstract class AbstractTextHandler implements TextHandlerInterface
 
     /**
      * Get the next handler in the chain
-     * 
+     *
      * @return TextHandlerInterface|null
      */
     public function getNext(): ?TextHandlerInterface
@@ -42,7 +42,7 @@ abstract class AbstractTextHandler implements TextHandlerInterface
     public function handle(string $text): string
     {
         $processedText = $this->process($text);
-        
+
         if ($this->nextHandler !== null) {
             return $this->nextHandler->handle($processedText);
         }
@@ -53,7 +53,7 @@ abstract class AbstractTextHandler implements TextHandlerInterface
     /**
      * Concrete implementation of text processing
      * Must be implemented by specific handlers
-     * 
+     *
      * @param string $text Text to process
      * @return string Processed text
      */

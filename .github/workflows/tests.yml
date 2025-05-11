@@ -26,9 +26,33 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
+          tools: phpcs
 
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-interaction --no-progress
 
+      - name: Check coding standards
+        run: composer lint
+
       - name: Execute tests
         run: composer test
+
+  lint:
+    runs-on: ubuntu-latest
+    name: Code Style
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          tools: phpcs
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Check coding standards
+        run: composer lint

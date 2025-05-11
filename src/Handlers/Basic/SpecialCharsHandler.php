@@ -20,7 +20,7 @@ class SpecialCharsHandler extends AbstractTextHandler
 
     /**
      * Process text by removing special characters
-     * 
+     *
      * @param string $text Input text
      * @return string Processed text without special characters
      */
@@ -34,7 +34,7 @@ class SpecialCharsHandler extends AbstractTextHandler
 
         // Create pattern that matches any of the special characters
         $pattern = '/[' . implode('', $escapedChars) . ']/u';
-        
+
         // Remove special characters while preserving spaces
         $text = preg_replace($pattern, '', $text);
 

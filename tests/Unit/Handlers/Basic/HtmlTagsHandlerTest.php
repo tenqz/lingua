@@ -21,7 +21,7 @@ class HtmlTagsHandlerTest extends TestCase
     {
         $input = "<p>Hello</p> <div>World</div>";
         $expected = "Hello World";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -33,7 +33,7 @@ class HtmlTagsHandlerTest extends TestCase
     {
         $input = "<div class=\"test\" id=\"example\">Content</div>";
         $expected = "Content";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -45,7 +45,7 @@ class HtmlTagsHandlerTest extends TestCase
     {
         $input = "<div><p>Hello <strong>World</strong></p></div>";
         $expected = "Hello World";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -57,7 +57,7 @@ class HtmlTagsHandlerTest extends TestCase
     {
         $input = "Hello <!-- This is a comment --> World";
         $expected = "Hello World";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -69,7 +69,7 @@ class HtmlTagsHandlerTest extends TestCase
     {
         $input = "<div>Hello</div>    <p>World</p>";
         $expected = "Hello World";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -79,9 +79,10 @@ class HtmlTagsHandlerTest extends TestCase
      */
     public function testHandlesComplexHtml(): void
     {
-        $input = "<html><body><h1>Title</h1><p>This is a <strong>test</strong> paragraph.</p><!-- Comment --><ul><li>Item 1</li><li>Item 2</li></ul></body></html>";
-        $expected = "TitleThis is a test paragraph.Item 1Item 2";
-        
+        $input = "<html><body><h1>Title</h1><p>This is a <strong>test</strong> paragraph.
+        </p><!-- Comment --><ul><li>Item 1</li><li>Item 2</li></ul></body></html>";
+        $expected = "TitleThis is a test paragraph. Item 1Item 2";
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -93,7 +94,7 @@ class HtmlTagsHandlerTest extends TestCase
     {
         $input = "<p>This &amp; that &lt;example&gt;</p>";
         $expected = "This &amp; that &lt;example&gt;";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -105,7 +106,7 @@ class HtmlTagsHandlerTest extends TestCase
     {
         $input = "Text with <br/> line break and <img src=\"example.jpg\" alt=\"Example\"/> image.";
         $expected = "Text with line break and image.";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -117,7 +118,7 @@ class HtmlTagsHandlerTest extends TestCase
     {
         $input = "";
         $expected = "";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -129,8 +130,8 @@ class HtmlTagsHandlerTest extends TestCase
     {
         $input = "Hello World";
         $expected = "Hello World";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
-} 
+}
