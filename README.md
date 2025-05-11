@@ -5,7 +5,7 @@
 <a href="https://packagist.org/packages/tenqz/lingua"><img src="https://img.shields.io/packagist/l/tenqz/lingua" alt="License"></a>
 </p>
 
-# Lingua
+# Lingua v2.0.0
 
 Lingua is a comprehensive PHP library designed for advanced text processing. It implements the Chain of Responsibility pattern to provide flexible and extensible text processing capabilities.
 
@@ -32,10 +32,27 @@ Removes special characters from text while preserving words and spaces. This han
 
 Example:
 ```php
-use Tenqz\Lingua\Handler\SpecialCharsHandler;
+use Tenqz\Lingua\Handlers\Basic\SpecialCharsHandler;
 
 $handler = new SpecialCharsHandler();
 $result = $handler->handle("Hello! @#$%^&*() World..."); // Returns: "Hello World"
+```
+
+### HtmlTagsHandler
+
+Removes HTML tags from text while preserving the content between them. This handler:
+- Removes all HTML tags using PHP's `strip_tags` function
+- Preserves HTML entities
+- Normalizes multiple spaces into single spaces
+- Trims spaces from the beginning and end of text
+
+Example:
+```php
+use Tenqz\Lingua\Handlers\Basic\HtmlTagsHandler;
+
+$handler = new HtmlTagsHandler();
+$result = $handler->handle("<p>Hello</p> <div>World</div>"); // Returns: "HelloWorld"
+$result = $handler->handle("<p>Hello &amp; World</p>"); // Returns: "Hello &amp; World"
 ```
 
 ## Installation
@@ -47,8 +64,9 @@ composer require tenqz/lingua
 ## Basic Usage
 
 ```php
-use Tenqz\Lingua\TextProcessor;
-use Tenqz\Lingua\Handler\TextHandlerInterface;
+use Tenqz\Lingua\Core\TextProcessor;
+use Tenqz\Lingua\Core\AbstractTextHandler;
+use Tenqz\Lingua\Core\Contracts\TextHandlerInterface;
 
 // Create a custom handler
 class CustomHandler extends AbstractTextHandler
@@ -63,12 +81,11 @@ class CustomHandler extends AbstractTextHandler
 // Initialize the processor
 $processor = new TextProcessor();
 
-// Register a processing scenario
-$handler = new CustomHandler();
-$processor->registerScenario('custom', $handler);
+// Add handlers to the chain
+$processor->addHandler(new CustomHandler());
 
 // Process text
-$result = $processor->process('custom', 'Your text here');
+$result = $processor->process('Your text here');
 ```
 
 ## Architecture
@@ -84,6 +101,7 @@ interface TextHandlerInterface
 {
     public function handle(string $text): string;
     public function setNext(TextHandlerInterface $handler): TextHandlerInterface;
+    public function getNext(): ?TextHandlerInterface;
 }
 ```
 
@@ -100,6 +118,11 @@ abstract class AbstractTextHandler implements TextHandlerInterface
     {
         $this->nextHandler = $handler;
         return $handler;
+    }
+    
+    public function getNext(): ?TextHandlerInterface
+    {
+        return $this->nextHandler;
     }
 
     public function handle(string $text): string
@@ -119,26 +142,36 @@ abstract class AbstractTextHandler implements TextHandlerInterface
 
 ### TextProcessor
 
-Facade class for managing text processing scenarios:
+Facade class for managing text processing chains:
 
 ```php
-class TextProcessor
+class TextProcessor implements TextProcessorInterface
 {
-    private array $scenarios = [];
+    private ?TextHandlerInterface $handlersChain = null;
 
-    public function registerScenario(string $name, TextHandlerInterface $handler): self
+    public function addHandler(TextHandlerInterface $handler): self
     {
-        $this->scenarios[$name] = $handler;
+        if (!$this->handlersChain) {
+            $this->handlersChain = $handler;
+            return $this;
+        }
+
+        $lastHandler = $this->handlersChain;
+        while ($lastHandler->getNext()) {
+            $lastHandler = $lastHandler->getNext();
+        }
+        
+        $lastHandler->setNext($handler);
         return $this;
     }
 
-    public function process(string $scenario, string $text): string
+    public function process(string $text): string
     {
-        if (!isset($this->scenarios[$scenario])) {
-            throw new ScenarioNotFoundException($scenario);
+        if (!$this->handlersChain) {
+            throw new NotFoundHandlerException();
         }
 
-        return $this->scenarios[$scenario]->handle($text);
+        return $this->handlersChain->handle($text);
     }
 }
 ```
@@ -148,6 +181,8 @@ class TextProcessor
 To create a custom handler, extend the `AbstractTextHandler` class and implement the `process` method:
 
 ```php
+use Tenqz\Lingua\Core\AbstractTextHandler;
+
 class MyCustomHandler extends AbstractTextHandler
 {
     protected function process(string $text): string
@@ -162,7 +197,7 @@ class MyCustomHandler extends AbstractTextHandler
 
 The library throws the following exceptions:
 
-- `ScenarioNotFoundException`: Thrown when attempting to process text with a non-existent scenario
+- `NotFoundHandlerException`: Thrown when attempting to process text with no registered handlers
 
 ## Testing
 

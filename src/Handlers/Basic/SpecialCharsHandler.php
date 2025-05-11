@@ -1,6 +1,8 @@
 <?php
 
-namespace Tenqz\Lingua\Handler;
+namespace Tenqz\Lingua\Handlers\Basic;
+
+use Tenqz\Lingua\Core\AbstractTextHandler;
 
 /**
  * Handler for removing special characters from text
@@ -42,4 +44,4 @@ class SpecialCharsHandler extends AbstractTextHandler
         // Remove spaces from beginning and end
         return trim($text);
     }
-} 
+}

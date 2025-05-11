@@ -1,6 +1,8 @@
 <?php
 
-namespace Tenqz\Lingua\Handler;
+namespace Tenqz\Lingua\Core;
+
+use Tenqz\Lingua\Core\Contracts\TextHandlerInterface;
 
 /**
  * Abstract base class for text processing handlers
@@ -25,6 +27,16 @@ abstract class AbstractTextHandler implements TextHandlerInterface
     }
 
     /**
+     * Get the next handler in the chain
+     * 
+     * @return TextHandlerInterface|null
+     */
+    public function getNext(): ?TextHandlerInterface
+    {
+        return $this->nextHandler;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function handle(string $text): string
@@ -46,4 +58,4 @@ abstract class AbstractTextHandler implements TextHandlerInterface
      * @return string Processed text
      */
     abstract protected function process(string $text): string;
-} 
+}

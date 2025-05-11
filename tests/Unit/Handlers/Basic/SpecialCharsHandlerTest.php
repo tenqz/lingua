@@ -1,9 +1,9 @@
 <?php
 
-namespace Tenqz\Lingua\Tests\Handler;
+namespace Tenqz\Lingua\Tests\Unit\Handlers\Basic;
 
 use PHPUnit\Framework\TestCase;
-use Tenqz\Lingua\Handler\SpecialCharsHandler;
+use Tenqz\Lingua\Handlers\Basic\SpecialCharsHandler;
 
 class SpecialCharsHandlerTest extends TestCase
 {
