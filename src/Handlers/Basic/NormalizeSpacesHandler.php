@@ -12,7 +12,7 @@ class NormalizeSpacesHandler extends AbstractTextHandler
 {
     /**
      * Process text by normalizing whitespace
-     * 
+     *
      * @param string $text Input text with potential multiple spaces/tabs
      * @return string Processed text with normalized whitespace
      */
@@ -21,4 +21,4 @@ class NormalizeSpacesHandler extends AbstractTextHandler
         // Replace all whitespace sequences with a single space
         return preg_replace('/\s+/', ' ', $text);
     }
-} 
+}

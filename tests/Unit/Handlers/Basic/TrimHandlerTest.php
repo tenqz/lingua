@@ -21,7 +21,7 @@ class TrimHandlerTest extends TestCase
     {
         $input = "  Hello World  ";
         $expected = "Hello World";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -33,7 +33,7 @@ class TrimHandlerTest extends TestCase
     {
         $input = "\t\nHello World\t\n";
         $expected = "Hello World";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -45,7 +45,7 @@ class TrimHandlerTest extends TestCase
     {
         $input = "  Hello   World  ";
         $expected = "Hello   World";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -57,7 +57,7 @@ class TrimHandlerTest extends TestCase
     {
         $input = "   \t\n  ";
         $expected = "";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -69,7 +69,7 @@ class TrimHandlerTest extends TestCase
     {
         $input = "Hello World";
         $expected = "Hello World";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -81,8 +81,8 @@ class TrimHandlerTest extends TestCase
     {
         $input = "";
         $expected = "";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
-} 
+}

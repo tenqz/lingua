@@ -12,7 +12,7 @@ class TrimHandler extends AbstractTextHandler
 {
     /**
      * Process text by trimming whitespace from beginning and end
-     * 
+     *
      * @param string $text Input text to trim
      * @return string Processed text without leading and trailing whitespace
      */
@@ -21,4 +21,4 @@ class TrimHandler extends AbstractTextHandler
         // Remove whitespace from beginning and end of the string
         return trim($text);
     }
-} 
+}

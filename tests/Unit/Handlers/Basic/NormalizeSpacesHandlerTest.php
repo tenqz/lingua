@@ -21,7 +21,7 @@ class NormalizeSpacesHandlerTest extends TestCase
     {
         $input = "Hello    World";
         $expected = "Hello World";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -33,7 +33,7 @@ class NormalizeSpacesHandlerTest extends TestCase
     {
         $input = "Hello\t\tWorld";
         $expected = "Hello World";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -45,7 +45,7 @@ class NormalizeSpacesHandlerTest extends TestCase
     {
         $input = "Hello\n\r\nWorld";
         $expected = "Hello World";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -57,7 +57,7 @@ class NormalizeSpacesHandlerTest extends TestCase
     {
         $input = "Hello \t \n World";
         $expected = "Hello World";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -69,7 +69,7 @@ class NormalizeSpacesHandlerTest extends TestCase
     {
         $input = " \t\n Hello World \t\n ";
         $expected = " Hello World ";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -81,7 +81,7 @@ class NormalizeSpacesHandlerTest extends TestCase
     {
         $input = "  Multiple   \t\n spaces \t between   words  ";
         $expected = " Multiple spaces between words ";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -93,7 +93,7 @@ class NormalizeSpacesHandlerTest extends TestCase
     {
         $input = "";
         $expected = "";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
@@ -105,8 +105,8 @@ class NormalizeSpacesHandlerTest extends TestCase
     {
         $input = "   \t\n  ";
         $expected = " ";
-        
+
         $result = $this->handler->handle($input);
         $this->assertEquals($expected, $result);
     }
-} 
+}

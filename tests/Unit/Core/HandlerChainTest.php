@@ -27,15 +27,15 @@ class HandlerChainTest extends TestCase
             ->addHandler(new SpecialCharsHandler())
             ->addHandler(new NormalizeSpacesHandler())
             ->addHandler(new TrimHandler());
-        
+
         // Text with special characters, extra spaces and newlines
         $input = "  Hello! @#$%^&*()\nWorld...\n\nTest    Test  ";
-        
+
         // After SpecialCharsHandler: "  Hello  World   Test    Test  "
         // After NormalizeSpacesHandler: " Hello World Test Test "
         // After TrimHandler: "Hello World Test Test"
         $expected = "Hello World Test Test";
-        
+
         $result = $this->processor->process($input);
         $this->assertEquals($expected, $result);
     }
@@ -50,15 +50,15 @@ class HandlerChainTest extends TestCase
             ->addHandler(new TrimHandler())
             ->addHandler(new NormalizeSpacesHandler())
             ->addHandler(new SpecialCharsHandler());
-        
+
         // Text with special characters, extra spaces and newlines
         $input = "  Hello! @#$%^&*()\nWorld...\n\nTest    Test  ";
-        
+
         // After TrimHandler: "Hello! @#$%^&*()\nWorld...\n\nTest    Test"
         // After NormalizeSpacesHandler: "Hello! @#$%^&*() World... Test Test"
         // After SpecialCharsHandler: "Hello  World Test Test"
         $expected = "Hello  World Test Test";
-        
+
         $result = $this->processor->process($input);
         $this->assertEquals($expected, $result);
     }
@@ -72,11 +72,11 @@ class HandlerChainTest extends TestCase
             ->addHandler(new SpecialCharsHandler())
             ->addHandler(new NormalizeSpacesHandler())
             ->addHandler(new TrimHandler());
-        
+
         $input = "   Hello,   World!   ";
         $expected = "Hello World";
-        
+
         $result = $this->processor->process($input);
         $this->assertEquals($expected, $result);
     }
-} 
+}

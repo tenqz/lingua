@@ -5,7 +5,7 @@
 <a href="https://packagist.org/packages/tenqz/lingua"><img src="https://img.shields.io/packagist/l/tenqz/lingua" alt="License"></a>
 </p>
 
-# Lingua v2.1.0
+# Lingua v2.1.1
 
 Lingua is a comprehensive PHP library designed for advanced text processing. It implements the Chain of Responsibility pattern to provide flexible and extensible text processing capabilities.
 
